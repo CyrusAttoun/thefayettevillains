@@ -22,7 +22,7 @@ export default function PostCarousel() {
   return (
     <Box my="xl">
       <Group justify="space-between" mb="sm" style={{ alignItems: 'center' }}>
-        <Title order={2}>Recent Community Posts</Title>
+        <Title order={2}>Featured Fayetteville Posts</Title>
         <Button size="xs" variant="light">View All Posts</Button>
       </Group>
       <Carousel
