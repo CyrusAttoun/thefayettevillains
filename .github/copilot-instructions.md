@@ -1,0 +1,1 @@
+- we use react and mantine for the frontend
