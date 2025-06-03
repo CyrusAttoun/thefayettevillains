@@ -1,73 +1,70 @@
-import { Box, Text, Group, Anchor, Container, Divider, Stack } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function Footer() {
   return (
-    <Box component="footer" bg="#18181b" c="white" pt={48} pb={24} mt="xl">
-      <Container size="lg" px="md" style={{ maxWidth: 1200 }}>
-        <Group align="flex-start" gap={48} wrap="wrap" style={{ justifyContent: 'space-between' }}>
+    <footer style={{ background: '#18181b', color: 'white', paddingTop: 48, paddingBottom: 24, marginTop: '2rem' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: 48 }}>
           {/* Left: Logo, subtitle, and description */}
-          <Box style={{ flex: 2, minWidth: 260 }}>
-            <Group align="center" gap={12} mb={12}>
+          <div style={{ flex: 2, minWidth: 260 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
               <FontAwesomeIcon icon={faMapMarkerAlt} color="#4ade80" size="2x" />
-              <Box>
-                <Text fw={700} size="xl">TheFayettevillains</Text>
-                <Text size="sm" c="#a3a3a3">Your Fayetteville Community Hub</Text>
-              </Box>
-            </Group>
-            <Text c="#d1d5db" size="sm" style={{ maxWidth: 340 }}>
+              <div>
+                <span style={{ fontWeight: 700, fontSize: '1.25rem', display: 'block' }}>TheFayettevillains</span>
+                <span style={{ fontSize: '0.9rem', color: '#a3a3a3' }}>Your Fayetteville Community Hub</span>
+              </div>
+            </div>
+            <span style={{ color: '#d1d5db', fontSize: '0.95rem', maxWidth: 340, display: 'block' }}>
               Connecting neighbors, supporting local businesses, and building a stronger Fayetteville community through shared experiences and trusted interactions.
-            </Text>
-          </Box>
+            </span>
+          </div>
           {/* Community Links */}
-          <Box style={{ minWidth: 160 }}>
-            <Text fw={600} mb={12}>Community</Text>
-            <Stack gap={4}>
+          <div style={{ minWidth: 160 }}>
+            <span style={{ fontWeight: 600, marginBottom: 12, display: 'block' }}>Community</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               <FooterLink href="/art">Local Art</FooterLink>
               <FooterLink href="/rummage">Rummage Sales</FooterLink>
               <FooterLink href="/restaurants">Restaurants</FooterLink>
               <FooterLink href="/posts">Community Posts</FooterLink>
-            </Stack>
-          </Box>
+            </div>
+          </div>
           {/* Services Links */}
-          <Box style={{ minWidth: 160 }}>
-            <Text fw={600} mb={12}>Services</Text>
-            <Stack gap={4}>
+          <div style={{ minWidth: 160 }}>
+            <span style={{ fontWeight: 600, marginBottom: 12, display: 'block' }}>Services</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               <FooterLink href="/real-estate">Real Estate</FooterLink>
               <FooterLink href="/marketplace">Marketplace</FooterLink>
               <FooterLink href="#">Privacy Policy</FooterLink>
               <FooterLink href="#">Community Guidelines</FooterLink>
-            </Stack>
-          </Box>
-        </Group>
-        <Divider my={32} color="#27272a" />
-        <Group justify="space-between" align="center" wrap="wrap">
-          <Text c="#a3a3a3" size="sm">
+            </div>
+          </div>
+        </div>
+        <div style={{ borderTop: '1px solid #27272a', margin: '2rem 0' }} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+          <span style={{ color: '#a3a3a3', fontSize: '0.95rem' }}>
             © 2024 TheFayettevillains. Made with{' '}
             <FontAwesomeIcon icon={faHeart} color="#f87171" style={{ verticalAlign: 'middle' }} />{' '}
             for Fayetteville, AR
-          </Text>
-          <Text c="#a3a3a3" size="sm" style={{ marginTop: 8 }}>
+          </span>
+          <span style={{ color: '#a3a3a3', fontSize: '0.95rem', marginTop: 8 }}>
             Privacy-focused • AI-moderated • Community-driven
-          </Text>
-        </Group>
-      </Container>
-    </Box>
+          </span>
+        </div>
+      </div>
+    </footer>
   );
 }
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Anchor
+    <a
       href={href}
-      c="#d1d5db"
-      size="sm"
-      style={{ textDecoration: 'none', transition: 'color 0.2s' }}
+      style={{ color: '#d1d5db', fontSize: '0.95rem', textDecoration: 'none', transition: 'color 0.2s' }}
       onMouseOver={e => (e.currentTarget.style.color = '#4ade80')}
       onMouseOut={e => (e.currentTarget.style.color = '#d1d5db')}
     >
       {children}
-    </Anchor>
+    </a>
   );
 }

@@ -1,5 +1,1 @@
-import { createTheme } from "@mantine/core";
-
-export const theme = createTheme({
-  /* Put your mantine theme override here */
-});
+// Mantine theme removed. This file is now empty or can be deleted.

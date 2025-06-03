@@ -1,4 +1,3 @@
-import { Card, Badge, Avatar, ActionIcon, Tooltip, Group, Text } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,10 +6,7 @@ const SHRINK_FACTOR = 0
 
 export default function PostCard({ post, focused }: { post: any; focused?: boolean }) {
     return (
-        <Card
-            shadow={focused ? 'xl' : 'sm'}
-            radius="md"
-            p={0}
+        <div
             style={{
                 position: 'relative',
                 overflow: 'hidden',
@@ -20,7 +16,9 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                 aspectRatio: '4/3',                
                 margin: '0 auto',
                 background: 'var(--color-background)',
-                fontFamily: 'var(--font-family-sans)'
+                fontFamily: 'var(--font-family-sans)',
+                borderRadius: 12,
+                boxShadow: focused ? '0 4px 32px rgba(0,0,0,0.18)' : '0 2px 8px rgba(0,0,0,0.10)'
             }}
         >
             {/* Image fills card */}
@@ -61,26 +59,30 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                     padding: '1.2rem 1rem 1rem 1rem'
                 }}
             >
-                <Badge
-                    leftSection={<FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />}
-                    color="blue"
-                    variant="light"
-                    size="sm"
+                <span
                     style={{
-                        cursor: 'pointer',
-                        alignSelf: 'flex-start',
-                        marginBottom: 8,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 4,
                         background: 'var(--color-primary-light)',
                         color: 'var(--color-primary)',
+                        borderRadius: 8,
+                        fontSize: 14,
+                        fontWeight: 600,
+                        padding: '2px 10px',
+                        marginBottom: 8,
+                        cursor: 'pointer',
+                        alignSelf: 'flex-start',
                         fontFamily: 'var(--font-family-sans)'
                     }}
                 >
+                    <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
                     {post.area}
-                </Badge>
-                <Text
-                    fw={700}
-                    size="lg"
+                </span>
+                <span
                     style={{
+                        fontWeight: 700,
+                        fontSize: '1.1rem',
                         marginBottom: 2,
                         color: '#fff',
                         textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
@@ -91,10 +93,10 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                     }}
                 >
                     {post.title}
-                </Text>
-                <Text
-                    size="sm"
+                </span>
+                <span
                     style={{
+                        fontSize: 14,
                         marginBottom: 6,
                         color: '#fff',
                         textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
@@ -105,12 +107,12 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                     }}
                 >
                     {post.description}
-                </Text>
+                </span>
                 {post.price && (
-                    <Text
-                        size="sm"
-                        fw={600}
+                    <span
                         style={{
+                            fontSize: 14,
+                            fontWeight: 600,
                             marginBottom: 4,
                             color: 'var(--color-primary)',
                             background: 'rgba(255,255,255,0.85)',
@@ -122,33 +124,29 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                         }}
                     >
                         {post.price}
-                    </Text>
+                    </span>
                 )}
-                <Group justify="space-between" style={{ marginTop: 'auto' }}>
-                    <Group gap={6}>
-                        <Avatar size={24} radius="xl" color="blue">{post.author[0]}</Avatar>
-                        <Text size="xs" style={{ color: '#fff', textShadow: '0 1px 4px #000' }}>{post.author}</Text>
-                        <Text size="xs" style={{ color: '#fff', opacity: 0.7, textShadow: '0 1px 4px #000' }}>• {formatDate(post.date)}</Text>
-                    </Group>
-                    <Group gap={8}>
-                        
-                        <Tooltip label="Upvotes" withArrow>
-                            <ActionIcon variant="subtle" size="unset" color="red" style={{ background: 'rgba(0,0,0,0.25)', paddingRight: 8, paddingLeft: 8 }}>
-                                <FontAwesomeIcon icon={faHeart} />
-                                <Text size="xs" style={{ marginLeft: 4, color: '#fff', textShadow: '0 1px 4px #000' }}>{post.upvotes}</Text>
-                            </ActionIcon>
-                        </Tooltip>
-
-                        <Tooltip label="Comments" withArrow>
-                            <ActionIcon variant="subtle" size="unset" color="gray" style={{ background: 'rgba(0,0,0,0.25)' }}>
-                                <FontAwesomeIcon icon={faComment} />
-                                <Text size="xs" style={{ marginLeft: 4, color: '#fff', textShadow: '0 1px 4px #000' }}>{post.comments}</Text>
-                            </ActionIcon>
-                        </Tooltip>
-                    </Group>
-                </Group>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span style={{
+                          width: 24, height: 24, borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14
+                        }}>{post.author[0]}</span>
+                        <span style={{ color: '#fff', fontSize: 13, textShadow: '0 1px 4px #000' }}>{post.author}</span>
+                        <span style={{ color: '#fff', opacity: 0.7, fontSize: 13, textShadow: '0 1px 4px #000' }}>• {formatDate(post.date)}</span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span title="Upvotes" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
+                            <FontAwesomeIcon icon={faHeart} />
+                            <span style={{ marginLeft: 4, fontSize: 13 }}>{post.upvotes}</span>
+                        </span>
+                        <span title="Comments" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
+                            <FontAwesomeIcon icon={faComment} />
+                            <span style={{ marginLeft: 4, fontSize: 13 }}>{post.comments}</span>
+                        </span>
+                    </div>
+                </div>
             </div>
-        </Card>
+        </div>
     );
 }
 

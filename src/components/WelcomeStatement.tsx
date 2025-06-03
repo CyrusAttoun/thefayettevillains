@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Text } from '@mantine/core';
 
 const TAGLINES = [
   'Where the hills are steep, the vibes are deep, and the rent makes you weep ',
@@ -24,7 +23,7 @@ export default function WelcomeStatement() {
   return (
     <div style={{ textAlign: 'center', margin: '2rem 0' }}>
       <h1>Welcome to The Fayettevillains</h1>
-      <Text size="lg" c="dimmed" mb={8}>{tagline}</Text>      
+      <span style={{ fontSize: '1.2rem', color: '#6b7280', display: 'block', marginBottom: 8 }}>{tagline}</span>
     </div>
   );
 }

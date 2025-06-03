@@ -1,25 +1,18 @@
-import "@mantine/core/styles.css";
-import { MantineProvider, AppShell, Container } from "@mantine/core";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { TopBar, PostCarousel, Footer } from ".";
 import WelcomeStatement from "./WelcomeStatement";
-import { theme } from "../theme";
 
 export default function App() {
   return (
     <Router>
-      <MantineProvider theme={theme}>
-        <AppShell padding={0}>
-          <TopBar />
-          <Container size="lg" px="md" style={{ minHeight: "70vh" }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              {/* Area and other routes will go here */}
-            </Routes>
-          </Container>
-          <Footer />
-        </AppShell>
-      </MantineProvider>
+      <TopBar />
+      <div style={{ maxWidth: 1200, margin: "0 auto", minHeight: "70vh", padding: "0 1rem" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Area and other routes will go here */}
+        </Routes>
+      </div>
+      <Footer />
     </Router>
   );
 }
