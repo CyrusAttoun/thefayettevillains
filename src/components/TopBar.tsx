@@ -29,15 +29,14 @@ export default function TopBar() {
   return (
     <Box component="header" style={{
       background: 'rgba(255,255,255,0.95)',
-      backdropFilter: 'blur(6px)',
-      borderBottom: '1px solid var(--color-border)',
+      backdropFilter: 'blur(6px)',      
       position: 'sticky',
       top: 0,
       zIndex: 50,
       fontFamily: 'var(--font-family-sans)'
     }}>
       <Container size="lg" px="md" style={{ maxWidth: 1200 }}>
-        <Group justify="space-between" align="center" style={{ height: 64 }}>
+        <Group justify="space-between" align="center" wrap="nowrap" style={{ height: 64 }}>
           {/* Logo and subtitle */}
           <Box component="a" href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
             {/* Villain/criminal SVG icon */}
@@ -63,7 +62,7 @@ export default function TopBar() {
             </Box>
           </Box>
           {/* Desktop nav and actions in one group */}
-          <Group gap={4} visibleFrom="md" style={{ flex: 1, justifyContent: 'center' }}>
+          <Group gap={4} visibleFrom="md" wrap="nowrap" style={{ flex: 1, justifyContent: 'center' }}>
             {AREAS.map(area => (
               <Button
                 key={area.name}
