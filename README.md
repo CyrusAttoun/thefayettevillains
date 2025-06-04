@@ -38,7 +38,7 @@ What does a card have?
 	
 Tech Stack
 ----------
-- react + mantine for frontend
+- react + radix-ui for frontend
 - publish frontend to github pages initially -- perhaps cloudflare workers in the future
 - build process for front end -- github workflows
 - python on backend?  I need python for AI so I might as well use it for everything
