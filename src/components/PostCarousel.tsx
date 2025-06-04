@@ -14,8 +14,7 @@ export default function PostCarousel() {
         additionalTransfrom={0}
         arrows
         autoPlaySpeed={3500}
-        centerMode={false}
-        className=""
+        centerMode        
         containerClass="container-with-dots"
         dotListClass=""
         draggable
@@ -53,10 +52,10 @@ export default function PostCarousel() {
         sliderClass=""
         slidesToSlide={1}
         swipeable
-        autoPlay
+        //autoPlay
       >
         {posts.map((post) => (
-          <div key={post.id} style={{ height: 340, display: 'flex', alignItems: 'stretch' }}>
+          <div key={post.id} style={{ height: 340, display: 'flex', alignItems: 'stretch', margin: '0 10px' }}>
             <PostCard post={post} />
           </div>
         ))}

@@ -8,12 +8,13 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
     return (
         <div
             style={{
+                display: 'flex',
                 position: 'relative',
                 overflow: 'hidden',
                 opacity: focused ? 1 : 0.6,
                 transform: focused ? `scale(${1.0 + SHRINK_FACTOR})` : `scale(${1.0 - SHRINK_FACTOR})`,
-                transition: 'all 0.3s',                
-                aspectRatio: '4/3',                
+                transition: 'all 0.3s',
+                aspectRatio: '4/3',
                 margin: '0 auto',
                 background: 'var(--color-background)',
                 fontFamily: 'var(--font-family-sans)',
@@ -51,7 +52,6 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                 style={{
                     position: 'relative',
                     zIndex: 3,
-                    height: '100%',
                     display: 'flex',
                     flex: 1,
                     flexDirection: 'column',
@@ -59,26 +59,51 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                     padding: '1.2rem 1rem 1rem 1rem'
                 }}
             >
-                <span
-                    style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: 4,
-                        background: 'var(--color-primary-light)',
-                        color: 'var(--color-primary)',
-                        borderRadius: 8,
-                        fontSize: 14,
-                        fontWeight: 600,
-                        padding: '2px 10px',
-                        marginBottom: 8,
-                        cursor: 'pointer',
-                        alignSelf: 'flex-start',
-                        fontFamily: 'var(--font-family-sans)'
-                    }}
-                >
-                    <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
-                    {post.area}
-                </span>
+
+                {/* TOP ROW */}
+                <div>
+                    <span
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            background: 'var(--color-primary-light)',
+                            color: 'var(--color-primary)',
+                            borderRadius: 8,
+                            fontSize: 14,
+                            fontWeight: 600,
+                            padding: '2px 10px',
+                            marginBottom: 8,
+                            cursor: 'pointer',
+                            alignSelf: 'flex-start',
+                            fontFamily: 'var(--font-family-sans)'
+                        }}
+                    >
+                        <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
+                        {post.area}
+                    </span>
+
+                    {post.price && (
+                        <span
+                            style={{
+                                fontSize: 14,
+                                fontWeight: 600,
+                                marginBottom: 4,
+                                color: 'var(--color-primary)',
+                                background: 'rgba(255,255,255,0.85)',
+                                borderRadius: 6,
+                                padding: '2px 8px',
+                                display: 'inline-block',
+                                fontFamily: 'var(--font-family-sans)',
+                                textShadow: '0 1px 4px rgba(0,0,0,0.2)'
+                            }}
+                        >
+                            {post.price}
+                        </span>
+                    )}
+
+                </div>
+
                 <span
                     style={{
                         fontWeight: 700,
@@ -108,28 +133,11 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                 >
                     {post.description}
                 </span>
-                {post.price && (
-                    <span
-                        style={{
-                            fontSize: 14,
-                            fontWeight: 600,
-                            marginBottom: 4,
-                            color: 'var(--color-primary)',
-                            background: 'rgba(255,255,255,0.85)',
-                            borderRadius: 6,
-                            padding: '2px 8px',
-                            display: 'inline-block',
-                            fontFamily: 'var(--font-family-sans)',
-                            textShadow: '0 1px 4px rgba(0,0,0,0.2)'
-                        }}
-                    >
-                        {post.price}
-                    </span>
-                )}
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                         <span style={{
-                          width: 24, height: 24, borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14
+                            width: 24, height: 24, borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14
                         }}>{post.author[0]}</span>
                         <span style={{ color: '#fff', fontSize: 13, textShadow: '0 1px 4px #000' }}>{post.author}</span>
                         <span style={{ color: '#fff', opacity: 0.7, fontSize: 13, textShadow: '0 1px 4px #000' }}>• {formatDate(post.date)}</span>
