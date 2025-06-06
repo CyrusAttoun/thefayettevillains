@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCog, faSignOutAlt, faList, faPlus, faMapMarkerAlt, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCog, faSignOutAlt, faList, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
 
@@ -25,7 +25,7 @@ export default function TopBar() {
     const navigate = useNavigate();
     const [menuOpened, setMenuOpened] = useState(false);
     const [selectedArea, setSelectedArea] = useState('Home');
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [,setMobileMenuOpen] = useState(false);
 
     return (
         <header style={{

@@ -1,4 +1,4 @@
-import { faTag, faPaw, faBreadSlice, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faTag, faPaw, faBreadSlice } from '@fortawesome/free-solid-svg-icons';
 
 const posts = [
   {
