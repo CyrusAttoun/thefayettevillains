@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { TopBar, PostCarousel, Footer } from ".";
 import WelcomeStatement from "./WelcomeStatement";
 
