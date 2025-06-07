@@ -64,12 +64,12 @@ function TitleAndDescription({ title, description }: { title: string; descriptio
 function Statistics({ author, date, upvotes, comments }: { author: string; date: string; upvotes: number; comments: number }) {
     return (
         <div className="postcard-stats-row">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div className="postcard-stats-author-group">
                 <span className="postcard-stats-author-initial">{author[0]}</span>
                 <span className="postcard-stats-author">{author}</span>
                 <span className="postcard-stats-date">• {formatDate(date)}</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div className="postcard-stats-icons">
                 <span title="Upvotes" className="postcard-stats-icon">
                     <FontAwesomeIcon icon={faHeart} />
                     <span className="postcard-stats-icon-count">{upvotes}</span>
