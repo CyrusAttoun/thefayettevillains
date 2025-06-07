@@ -1,25 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { Post } from '../types/Post';
 
 //const SHRINK_FACTOR = 0.12
 const SHRINK_FACTOR = 0
 
-export default function PostCard({ post, focused }: { post: any; focused?: boolean }) {
+export default function PostCard({ post, focused }: { post: Post; focused?: boolean }) {
     return (
         <div
             style={{
                 display: 'flex',
                 position: 'relative',
                 overflow: 'hidden',
-                opacity: focused ? 1 : 0.6,
-                transform: focused ? `scale(${1.0 + SHRINK_FACTOR})` : `scale(${1.0 - SHRINK_FACTOR})`,
+                //opacity: focused ? 1 : 0.6,
+                //transform: focused ? `scale(${1.0 + SHRINK_FACTOR})` : `scale(${1.0 - SHRINK_FACTOR})`,
                 transition: 'all 0.3s',
-                aspectRatio: '4/3',
+                //aspectRatio: '4/3',
                 margin: '0 auto',
                 background: 'var(--color-background)',
                 fontFamily: 'var(--font-family-sans)',
                 borderRadius: 12,
-                boxShadow: focused ? '0 4px 32px rgba(0,0,0,0.18)' : '0 2px 8px rgba(0,0,0,0.10)'
+                boxShadow: focused ? '0 4px 32px rgba(0,0,0,0.18)' : '0 2px 8px rgba(0,0,0,0.10)',
+                height: 340, 
+                alignItems: 'stretch'
             }}
         >
             {/* Image fills card */}
@@ -34,7 +37,7 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                         height: '100%',
                         objectFit: 'cover',
                         zIndex: 1,
-                        filter: focused ? 'none' : 'blur(1.5px) brightness(0.85)'
+                        //filter: focused ? 'none' : 'blur(1.5px) brightness(0.85)'
                     }}
                 />
             )}
@@ -60,99 +63,12 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
                 }}
             >
 
-                {/* TOP ROW */}
-                <div>
-                    <span
-                        style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: 4,
-                            background: 'var(--color-primary-light)',
-                            color: 'var(--color-primary)',
-                            borderRadius: 8,
-                            fontSize: 14,
-                            fontWeight: 600,
-                            padding: '2px 10px',
-                            marginBottom: 8,
-                            cursor: 'pointer',
-                            alignSelf: 'flex-start',
-                            fontFamily: 'var(--font-family-sans)'
-                        }}
-                    >
-                        <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
-                        {post.area}
-                    </span>
+                <TopRow post={post}/>
 
-                    {post.price && (
-                        <span
-                            style={{
-                                fontSize: 14,
-                                fontWeight: 600,
-                                marginBottom: 4,
-                                color: 'var(--color-primary)',
-                                background: 'rgba(255,255,255,0.85)',
-                                borderRadius: 6,
-                                padding: '2px 8px',
-                                display: 'inline-block',
-                                fontFamily: 'var(--font-family-sans)',
-                                textShadow: '0 1px 4px rgba(0,0,0,0.2)'
-                            }}
-                        >
-                            {post.price}
-                        </span>
-                    )}
 
-                </div>
+                <TitleAndDescription title={post.title} description={post.description} />
 
-                <span
-                    style={{
-                        fontWeight: 700,
-                        fontSize: '1.1rem',
-                        marginBottom: 2,
-                        color: '#fff',
-                        textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
-                        fontFamily: 'var(--font-family-heading)',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                    }}
-                >
-                    {post.title}
-                </span>
-                <span
-                    style={{
-                        fontSize: 14,
-                        marginBottom: 6,
-                        color: '#fff',
-                        textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden'
-                    }}
-                >
-                    {post.description}
-                </span>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{
-                            width: 24, height: 24, borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14
-                        }}>{post.author[0]}</span>
-                        <span style={{ color: '#fff', fontSize: 13, textShadow: '0 1px 4px #000' }}>{post.author}</span>
-                        <span style={{ color: '#fff', opacity: 0.7, fontSize: 13, textShadow: '0 1px 4px #000' }}>• {formatDate(post.date)}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span title="Upvotes" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
-                            <FontAwesomeIcon icon={faHeart} />
-                            <span style={{ marginLeft: 4, fontSize: 13 }}>{post.upvotes}</span>
-                        </span>
-                        <span title="Comments" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
-                            <FontAwesomeIcon icon={faComment} />
-                            <span style={{ marginLeft: 4, fontSize: 13 }}>{post.comments}</span>
-                        </span>
-                    </div>
-                </div>
+                <Statistics author={post.author} date={post.date} upvotes={post.upvotes} comments={post.comments} />
             </div>
         </div>
     );
@@ -161,4 +77,115 @@ export default function PostCard({ post, focused }: { post: any; focused?: boole
 function formatDate(date: string) {
     const d = new Date(date);
     return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+
+function TopRow({post}: { post: Post }) {
+    return (
+
+
+        <div>
+            <span
+                style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 4,
+                    background: 'var(--color-primary-light)',
+                    color: 'var(--color-primary)',
+                    borderRadius: 8,
+                    fontSize: 14,
+                    fontWeight: 600,
+                    padding: '2px 10px',
+                    marginBottom: 8,
+                    cursor: 'pointer',
+                    alignSelf: 'flex-start',
+                    fontFamily: 'var(--font-family-sans)'
+                }}
+            >
+                <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
+                {post.area}
+            </span>
+
+            {post.price && (
+                <span
+                    style={{
+                        fontSize: 14,
+                        fontWeight: 600,
+                        marginBottom: 4,
+                        color: 'var(--color-primary)',
+                        background: 'rgba(255,255,255,0.85)',
+                        borderRadius: 6,
+                        padding: '2px 8px',
+                        display: 'inline-block',
+                        fontFamily: 'var(--font-family-sans)',
+                        textShadow: '0 1px 4px rgba(0,0,0,0.2)'
+                    }}
+                >
+                    {post.price}
+                </span>
+            )}
+
+        </div>
+    )
+}
+
+// Title and Description section for PostCard
+function TitleAndDescription({ title, description }: { title: string; description: string }) {
+    return (
+        <>
+            <span
+                style={{
+                    fontWeight: 700,
+                    fontSize: '1.1rem',
+                    marginBottom: 2,
+                    color: '#fff',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
+                    fontFamily: 'var(--font-family-heading)',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
+                }}
+            >
+                {title}
+            </span>
+            <span
+                style={{
+                    fontSize: 14,
+                    marginBottom: 6,
+                    color: '#fff',
+                    textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 0 2px #000',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
+                }}
+            >
+                {description}
+            </span>
+        </>
+    );
+}
+
+function Statistics({author, date, upvotes, comments}: { author: string; date: string; upvotes: number; comments: number }) {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{
+                    width: 24, height: 24, borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14
+                }}>{author[0]}</span>
+                <span style={{ color: '#fff', fontSize: 13, textShadow: '0 1px 4px #000' }}>{author}</span>
+                <span style={{ color: '#fff', opacity: 0.7, fontSize: 13, textShadow: '0 1px 4px #000' }}>• {formatDate(date)}</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span title="Upvotes" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
+                    <FontAwesomeIcon icon={faHeart} />
+                    <span style={{ marginLeft: 4, fontSize: 13 }}>{upvotes}</span>
+                </span>
+                <span title="Comments" style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: 6, padding: '2px 8px', color: '#fff', cursor: 'pointer' }}>
+                    <FontAwesomeIcon icon={faComment} />
+                    <span style={{ marginLeft: 4, fontSize: 13 }}>{comments}</span>
+                </span>
+            </div>
+        </div>
+    )
 }

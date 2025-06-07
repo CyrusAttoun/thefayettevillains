@@ -1,7 +1,9 @@
+import { Post } from '../types/Post';
 import posts from '../data/posts';
 import PostCard from './PostCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
 
 export default function PostCarousel() {
   return (
@@ -55,9 +57,7 @@ export default function PostCarousel() {
         //autoPlay
       >
         {posts.map((post) => (
-          <div key={post.id} style={{ height: 340, display: 'flex', alignItems: 'stretch', margin: '0 10px' }}>
-            <PostCard post={post} />
-          </div>
+            <PostCard post={post as Post} />
         ))}
       </Carousel>
     </div>
