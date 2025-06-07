@@ -3,15 +3,11 @@ import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { Post } from '../types/Post';
 import './PostCard.css';
 
-//const SHRINK_FACTOR = 0.12
-const SHRINK_FACTOR = 0
-
+// PostCard displays a single post as a styled card
 export default function PostCard({ post, focused }: { post: Post; focused?: boolean }) {
     return (
-        <div
-            className={`postcard-root${focused ? ' focused' : ''}`}
-        >
-            {/* Image fills card */}
+        <div className={`postcard-root${focused ? ' focused' : ''}`}>
+            {/* Post image as background */}
             {post.image && (
                 <img
                     src={post.image}
@@ -21,9 +17,9 @@ export default function PostCard({ post, focused }: { post: Post; focused?: bool
             )}
             {/* Overlay for text readability */}
             <div className="postcard-overlay" />
-            {/* Card content */}
+            {/* Main card content */}
             <div className="postcard-content">
-                <TopRow post={post}/>
+                <TopRow post={post} />
                 <TitleAndDescription title={post.title} description={post.description} />
                 <Statistics author={post.author} date={post.date} upvotes={post.upvotes} comments={post.comments} />
             </div>
@@ -31,45 +27,41 @@ export default function PostCard({ post, focused }: { post: Post; focused?: bool
     );
 }
 
+// Format date as 'Mon DD'
 function formatDate(date: string) {
     const d = new Date(date);
     return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 }
 
-
-function TopRow({post}: { post: Post }) {
+// TopRow displays the area and price badge
+function TopRow({ post }: { post: Post }) {
     return (
         <div>
             <span className="postcard-toprow-area">
                 <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
                 {post.area}
             </span>
-
             {post.price && (
                 <span className="postcard-toprow-price">
                     {post.price}
                 </span>
             )}
-
         </div>
-    )
+    );
 }
 
-// Title and Description section for PostCard
+// TitleAndDescription displays the post's title and description
 function TitleAndDescription({ title, description }: { title: string; description: string }) {
     return (
         <>
-            <span className="postcard-title">
-                {title}
-            </span>
-            <span className="postcard-description">
-                {description}
-            </span>
+            <span className="postcard-title">{title}</span>
+            <span className="postcard-description">{description}</span>
         </>
     );
 }
 
-function Statistics({author, date, upvotes, comments}: { author: string; date: string; upvotes: number; comments: number }) {
+// Statistics displays author, date, upvotes, and comments
+function Statistics({ author, date, upvotes, comments }: { author: string; date: string; upvotes: number; comments: number }) {
     return (
         <div className="postcard-stats-row">
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -88,5 +80,5 @@ function Statistics({author, date, upvotes, comments}: { author: string; date: s
                 </span>
             </div>
         </div>
-    )
+    );
 }
