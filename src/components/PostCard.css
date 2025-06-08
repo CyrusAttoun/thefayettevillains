@@ -5,12 +5,13 @@
     position: relative;
     overflow: hidden;
     transition: box-shadow 0.3s;
-    margin: 0 auto;
+    margin: 0 8px;
     background: var(--color-background);
     font-family: var(--font-family-sans);
     border-radius: 12px;
     height: 340px;
     align-items: stretch;
+    
 }
 
 .postcard-root.focused {

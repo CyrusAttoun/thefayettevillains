@@ -45,6 +45,51 @@ const posts = [
     location: 'Farmington',
     price: '$8',
     badge: 'Food'
+  },
+  {
+    id: 4,
+    area: 'Event',
+    areaIcon: faTag,
+    title: 'Community Yard Sale This Saturday',
+    description: 'Multiple families participating. Great deals on clothes, toys, and more! 8am-2pm at Wilson Park.',
+    author: 'Neighborhood Assoc.',
+    date: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(), // 8 hours ago
+    upvotes: 7,
+    comments: 2,
+    image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80',
+    location: 'Fayetteville',
+    price: null,
+    badge: 'Event'
+  },
+  {
+    id: 5,
+    area: 'Help Wanted',
+    areaIcon: faTag,
+    title: 'Looking for Lawn Mowing Service',
+    description: 'Need someone to mow my yard this week. Please DM with rates and availability.',
+    author: 'Tom S.',
+    date: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString(), // 12 hours ago
+    upvotes: 3,
+    comments: 1,
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    location: 'Johnson',
+    price: null,
+    badge: 'Help Wanted'
+  },
+  {
+    id: 6,
+    area: 'For Sale',
+    areaIcon: faTag,
+    title: 'Mountain Bike - Like New',
+    description: '2023 Trek Marlin 5, barely used. $450 OBO. Includes helmet and lock.',
+    author: 'Emily W.',
+    date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
+    upvotes: 15,
+    comments: 4,
+    image: 'https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=600&q=80',
+    location: 'Springdale',
+    price: '$450',
+    badge: 'For Sale'
   }
 ];
 
