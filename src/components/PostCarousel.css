@@ -1,7 +1,9 @@
 .slick-slide {
     transform: scale(0.95);
     transition: transform 0.3s;    
+    opacity: 0.8;
 }
-.slick-center {
+.slick-slide.slick-center {
     transform: scale(1.05);    
+    opacity: 1;
 }
