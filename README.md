@@ -1,3 +1,17 @@
+# thefayettevillains Monorepo
+
+## Structure
+
+- `client/` — React frontend (Mantine, Vite)
+- `server/` — Python backend (add your API code)
+- `.github/` — CI/CD workflows
+
+## Setup
+
+See `client/README.md` and `server/README.md` for details.
+
+---
+
 TheFayettevillains
 ------------------
 A community postings site for residents of Fayetteville, AR and surrounding areas

@@ -129,4 +129,18 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Node
+node_modules/
+client/node_modules/
+
+# Build
+client/dist/
+
+# Python
+server/venv/
+__pycache__/
+*.pyc
+
+# OS
 .DS_Store
+Thumbs.db
