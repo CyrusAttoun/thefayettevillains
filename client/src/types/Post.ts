@@ -1,5 +1,6 @@
 // Post type for use throughout the app
 export type Post = {
+    id: number;
     image?: string;
     title: string;
     description: string;
@@ -8,6 +9,8 @@ export type Post = {
     upvotes: number;
     comments: number;
     area: string;
-    areaIcon: any; // FontAwesome icon type
-    price?: string;
+    areaIcon: string; // Now a string key from backend (e.g., 'faTag')
+    price?: string | null;
+    location?: string;
+    badge?: string;
 };

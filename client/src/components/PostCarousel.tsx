@@ -1,13 +1,31 @@
+import { useEffect, useState } from 'react';
 import { Post } from '../types/Post';
-import posts from '../data/posts';
 import PostCard from './PostCard';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './PostCarousel.css';
+import { faTag, faPaw, faBreadSlice } from '@fortawesome/free-solid-svg-icons';
 
+const ICON_MAP: Record<string, any> = {
+  faTag,
+  faPaw,
+  faBreadSlice,
+};
 
 export default function PostCarousel() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/posts`)
+      .then(res => res.json())
+      .then(data => {
+        setPosts(data.map((post: any) => ({
+          ...post,
+          areaIcon: ICON_MAP[post.areaIcon] || faTag,
+        })));
+      });
+  }, []);
+
   const settings = {
     dots: false,
     centerMode: true,

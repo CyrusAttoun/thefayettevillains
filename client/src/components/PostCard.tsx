@@ -4,7 +4,7 @@ import { Post } from '../types/Post';
 import './PostCard.css';
 
 // PostCard displays a single post as a styled card
-export default function PostCard({ post, focused }: { post: Post; focused?: boolean }) {
+export default function PostCard({ post, focused }: { post: import('../types/Post').Post; focused?: boolean }) {
     return (
         <div className={`postcard-root${focused ? ' focused' : ''}`}>
             {/* Post image as background */}
@@ -34,11 +34,12 @@ function formatDate(date: string) {
 }
 
 // TopRow displays the area and price badge
-function TopRow({ post }: { post: Post }) {
+function TopRow({ post }: { post: import('../types/Post').Post }) {
+    // areaIcon is now always an IconProp (mapped in PostCarousel)
     return (
         <div>
             <span className="postcard-toprow-area">
-                <FontAwesomeIcon icon={post.areaIcon} style={{ marginRight: 4 }} />
+                <FontAwesomeIcon icon={post.areaIcon as any} style={{ marginRight: 4 }} />
                 {post.area}
             </span>
             {post.price && (
