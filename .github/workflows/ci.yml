@@ -24,26 +24,26 @@ jobs:
           cd client
           npm run build
 
-    # server
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
+    # server - disabled since railway handles the server deployment
+    #   - name: Set up Python
+    #     uses: actions/setup-python@v5
+    #     with:
+    #       python-version: '3.13'
 
-      - name: Install Poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | python3 -
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+    #   - name: Install Poetry
+    #     run: |
+    #       curl -sSL https://install.python-poetry.org | python3 -
+    #       echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies (server)
-        run: |
-          cd server
+    #   - name: Install dependencies (server)
+    #     run: |
+    #       cd server
           
-          poetry install          
-      - name: Run server tests
-        run: |
-          cd server
-          pytest || true
+    #       poetry install          
+    #   - name: Run server tests
+    #     run: |
+    #       cd server
+    #       pytest || true
 
     # deploy client
       - name: Deploy to GitHub Pages
