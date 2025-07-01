@@ -8,3 +8,4 @@ This is the React frontend for thefayettevillains.
    npm install
 2. Start the dev server:
    npm run dev
+

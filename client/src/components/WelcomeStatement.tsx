@@ -1,23 +1,23 @@
-import { useMemo } from 'react';
-
-const TAGLINES = [
-  'Where the hills are steep, the vibes are deep, and the rent makes you weep ',
-  "Where every street is a cul-de-sac so we stumble drunkenly by greenway",
-  "A little bit country, a little bit rock n' roll",
-  'A little piece of Texas right here in Arkansas',
-  "It's trashy, but it's our trash",
-  "A place where a bunch of poor people live in homes they can't afford",
-  "At least it's not Bentonville",
-  "At least it's not Oklahoma",
-  "Lately we kinda wish we were Springdale",
-  "The Subject Matter Experts on futile protests",
-  "An airbnb community owned by Texans"
-];
+import { useState, useEffect } from 'react';
 
 export default function WelcomeStatement() {
-  const tagline = useMemo(() => {
-    const idx = Math.floor(Math.random() * TAGLINES.length);
-    return TAGLINES[idx];
+  const [tagline, setTagline] = useState('Welcome to The Fayettevillains');
+
+  useEffect(() => {
+    const fetchTagline = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/tagline');
+        if (response.ok) {
+          const data = await response.json();
+          setTagline(data.text);
+        }
+      } catch (error) {
+        console.error('Failed to fetch tagline:', error);
+        // Keep default tagline on error
+      }
+    };
+
+    fetchTagline();
   }, []);
 
   return (
