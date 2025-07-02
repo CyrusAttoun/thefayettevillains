@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(yarn add:*)",
+      "Bash(corepack enable)",
+      "Bash(npm run typecheck:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
