@@ -7,7 +7,13 @@
       "Bash(yarn add:*)",
       "Bash(corepack enable)",
       "Bash(npm run typecheck:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "WebFetch(domain:supabase.com)",
+      "Read(*)",
+      "Search(*)",
+      "Edit(*)",
+      "Write(*)",
+      "Bash(npm run build:*)"
     ],
     "deny": []
   }

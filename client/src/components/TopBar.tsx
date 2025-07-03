@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faSignOutAlt, faList, faPlus, faBars } from '@fortawesome/free-solid-svg-icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
+import { useAuth } from '../contexts/AuthContext';
+import LoginModal from './LoginModal';
 
 const AREAS = [
     { name: 'Home', path: '/' },
@@ -15,17 +17,13 @@ const AREAS = [
     { name: 'Marketplace', path: '/marketplace' },
 ];
 
-const user = {
-    name: 'Jane Doe',
-    initials: 'JD',
-    loggedIn: false,
-};
-
 export default function TopBar() {
     const navigate = useNavigate();
     const [menuOpened, setMenuOpened] = useState(false);
     const [selectedArea, setSelectedArea] = useState('Home');
     const [,setMobileMenuOpen] = useState(false);
+    const [loginModalOpen, setLoginModalOpen] = useState(false);
+    const { user, signOut, getInitials, loading } = useAuth();
 
     return (
         <header style={{
@@ -59,23 +57,30 @@ export default function TopBar() {
                         ))}
                         <button
                             style={{ textWrap: 'nowrap', background: 'var(--color-primary)', color: '#fff', height: 40, padding: '0 1.5rem', marginRight: 8, border: 'none', borderRadius: 8, fontFamily: 'var(--font-family-sans)', fontWeight: 600, fontSize: 16, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
-                            onClick={() => { }}
+                            onClick={() => {
+                                if (!user) {
+                                    setLoginModalOpen(true);
+                                } else {
+                                    // Navigate to post creation
+                                    navigate('/create-post');
+                                }
+                            }}
                         >
                             <FontAwesomeIcon icon={faPlus} /> Post Something
                         </button>
-                        {!user.loggedIn && (
+                        {!user && !loading && (
                             <button
                                 style={{ textWrap: 'nowrap', border: '1.5px solid var(--color-primary-light)', color: 'var(--color-primary)', background: 'var(--color-background)', height: 40, padding: '0 1.5rem', marginLeft: 0, marginRight: 8, borderRadius: 8, fontFamily: 'var(--font-family-sans)', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}
-                                onClick={() => { }}
+                                onClick={() => setLoginModalOpen(true)}
                             >
                                 Sign In
                             </button>
                         )}
-                        {user.loggedIn && (
+                        {user && (
                             <DropdownMenu.Root open={menuOpened} onOpenChange={setMenuOpened}>
                                 <DropdownMenu.Trigger asChild>
                                     <Avatar.Root style={{ cursor: 'pointer', marginLeft: 16, width: 36, height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontWeight: 700, fontSize: 16 }}>
-                                        <Avatar.Fallback>{user.initials}</Avatar.Fallback>
+                                        <Avatar.Fallback>{getInitials()}</Avatar.Fallback>
                                     </Avatar.Root>
                                 </DropdownMenu.Trigger>
                                 <DropdownMenu.Content sideOffset={8} align="end" style={{ minWidth: 180, background: '#fff', borderRadius: 8, boxShadow: '0 4px 24px rgba(0,0,0,0.12)', padding: 8 }}>
@@ -85,7 +90,7 @@ export default function TopBar() {
                                     <DropdownMenu.Item onSelect={() => { }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
                                         <FontAwesomeIcon icon={faList} /> My Posts
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item onSelect={() => { }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
+                                    <DropdownMenu.Item onSelect={() => signOut()} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
                                         <FontAwesomeIcon icon={faSignOutAlt} /> Logout
                                     </DropdownMenu.Item>
                                 </DropdownMenu.Content>
@@ -98,6 +103,7 @@ export default function TopBar() {
                     </button>
                 </div>
             </div>
+            <LoginModal open={loginModalOpen} onOpenChange={setLoginModalOpen} />
         </header>
     );
 }

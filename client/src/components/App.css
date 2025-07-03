@@ -1,0 +1,22 @@
+
+/* quicky for disabling an element */
+.disabled {
+  position: relative;
+}
+
+.disabled::after {
+  content: "I AM STOOPIT";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.5); /* white at 50% opacity */
+  pointer-events: none;
+  z-index: 2;
+  
+  display: flex;
+  align-items: center;
+    justify-content: center;
+
+  color: black;
+  font-weight: 800;
+  font-size: 16px;
+}
