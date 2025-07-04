@@ -1,12 +1,24 @@
 # FastAPI server with LanceDB integration
+import logging
 from fastapi import FastAPI, HTTPException, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import random
+import traceback
+from contextlib import asynccontextmanager
 from .database import init_tables, get_posts as db_get_posts, get_taglines, store_image
 from .config import settings
 
-app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION)
+@asynccontextmanager
+def lifespan(app: FastAPI):
+    # Initialize logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.getLogger().setLevel(logging.INFO)
+    init_tables()
+    yield
+    # (Optional) Add any shutdown/cleanup logic here
+
+app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,11 +27,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Initialize database tables on startup
-@app.on_event("startup")
-async def startup_event():
-    init_tables()
 
 @app.get("/")
 def read_root():
@@ -31,7 +38,8 @@ def get_posts():
     try:
         return db_get_posts()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error fetching posts: {str(e)}")
+        logging.error("Error fetching posts", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error fetching posts: {str(e)}\n{traceback.format_exc()}")
 
 @app.get("/tagline")
 def get_random_tagline():
@@ -44,7 +52,8 @@ def get_random_tagline():
         random_tagline = random.choice(taglines)
         return {"text": random_tagline["text"]}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error fetching tagline: {str(e)}")
+        logging.error("Error fetching tagline", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error fetching tagline: {str(e)}\n{traceback.format_exc()}")
 
 @app.post("/upload-image/{post_id}")
 async def upload_image(post_id: int, file: UploadFile = File(...)):
@@ -58,7 +67,8 @@ async def upload_image(post_id: int, file: UploadFile = File(...)):
         
         return {"message": "Image uploaded successfully", "image_ref": image_ref}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error uploading image: {str(e)}")
+        logging.error("Error uploading image", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Error uploading image: {str(e)}\n{traceback.format_exc()}")
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
