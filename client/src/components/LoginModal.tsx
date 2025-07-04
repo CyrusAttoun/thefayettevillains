@@ -223,7 +223,7 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
                         or
                     </div>
 
-                    <form onSubmit={handleEmailAuth} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                    <form onSubmit={handleEmailAuth} style={{ display: 'flex', flexDirection: 'column', gap: 16 }} className="disabled">
                         <input
                             type="email"
                             placeholder="Email"
@@ -236,8 +236,7 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
                                 borderRadius: 8,
                                 fontSize: 14,
                                 fontFamily: 'var(--font-family-sans)'
-                            }}
-                            className="disabled"
+                            }}                            
                         />
                         <input
                             type="password"
@@ -251,8 +250,7 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
                                 borderRadius: 8,
                                 fontSize: 14,
                                 fontFamily: 'var(--font-family-sans)'
-                            }}
-                            className="disabled"
+                            }}                            
                         />
                         <button
                             type="submit"
@@ -268,7 +266,7 @@ export default function LoginModal({ open, onOpenChange }: LoginModalProps) {
                                 cursor: 'pointer',
                                 fontFamily: 'var(--font-family-sans)'
                             }}
-                            className="disabled"
+                         
                         >
                             {loading ? 'Loading...' : (isSignUp ? 'Create Account' : 'Sign In')}
                         </button>

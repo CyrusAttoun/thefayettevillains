@@ -1,22 +1,27 @@
 
-/* quicky for disabling an element */
-.disabled {
-  position: relative;
+button {                                
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 6px 14px;
+    font-size: 15;
+    cursor: pointer;
+    font-family: var(--font-family-sans);
+    transition: background 0.3s, color 0.3s;
+    text-wrap: nowrap;
 }
 
-.disabled::after {
-  content: "I AM STOOPIT";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.5); /* white at 50% opacity */
-  pointer-events: none;
-  z-index: 2;
-  
-  display: flex;
-  align-items: center;
-    justify-content: center;
+button.selected {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
 
-  color: black;
-  font-weight: 800;
-  font-size: 16px;
+
+/* quicky for disabling an element */
+.disabled {
+    position: relative;
+    pointer-events: none;
+    filter: blur(2px);
 }
