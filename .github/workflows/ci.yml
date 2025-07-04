@@ -7,8 +7,7 @@ on:
   workflow_dispatch:  # Allow manual triggers
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
-    environment: github-pages
+    runs-on: ubuntu-latest    
     steps:
       - uses: actions/checkout@v4
 
