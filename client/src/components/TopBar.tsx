@@ -6,6 +6,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Avatar from '@radix-ui/react-avatar';
 import { useAuth } from '../contexts/AuthContext';
 import LoginModal from './LoginModal';
+import './TopBar.css';
 
 const AREAS = [
     { name: 'Home', path: '/' },
@@ -26,26 +27,19 @@ export default function TopBar() {
     const { user, signOut, getInitials, loading } = useAuth();
 
     return (
-        <header style={{
-            background: 'rgba(255,255,255,0.95)',
-            backdropFilter: 'blur(6px)',
-            position: 'sticky',
-            top: 0,
-            zIndex: 50,
-            fontFamily: 'var(--font-family-sans)'
-        }}>
-            <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 64 }}>
+        <header className="topbar">
+            <div className="topbar-container">
+                <div className="topbar-content">
                     {/* Logo and subtitle */}
-                    <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>                        
+                    <a href="/" className="logo-container">                        
                         <VillainIcon width={32} height={32}/>
-                        <span style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ fontSize: 20, fontWeight: 700, color: 'var(--color-text)', transition: 'color 0.2s', fontFamily: 'var(--font-family-heading)' }}>TheFayettevillains</span>
-                            <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>Fayetteville, AR Community</span>
+                        <span className="logo-text">
+                            <span className="logo-title">TheFayettevillains</span>
+                            <span className="logo-subtitle">Fayetteville, AR Community</span>
                         </span>
                     </a>
                     {/* Desktop nav and actions in one group */}
-                    <nav style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center', gap: 8, marginLeft: '2em', marginRight: '2em' }}>
+                    <nav className="nav-container">
                         {AREAS.map(area => (
                             <button
                                 key={area.name}
@@ -56,7 +50,7 @@ export default function TopBar() {
                             </button>
                         ))}
                         <button
-                            style={{ textWrap: 'nowrap', background: 'var(--color-primary)', color: '#fff', height: 40, padding: '0 1.5rem', marginRight: 8, border: 'none', borderRadius: 8, fontFamily: 'var(--font-family-sans)', fontWeight: 600, fontSize: 16, display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+                            className="post-button"
                             onClick={() => {
                                 if (!user) {
                                     setLoginModalOpen(true);
@@ -70,7 +64,7 @@ export default function TopBar() {
                         </button>
                         {!user && !loading && (
                             <button
-                                style={{ textWrap: 'nowrap', border: '1.5px solid var(--color-primary-light)', color: 'var(--color-primary)', background: 'var(--color-background)', height: 40, padding: '0 1.5rem', marginLeft: 0, marginRight: 8, borderRadius: 8, fontFamily: 'var(--font-family-sans)', fontWeight: 600, fontSize: 16, cursor: 'pointer' }}
+                                className="signin-button"
                                 onClick={() => setLoginModalOpen(true)}
                             >
                                 Sign In
@@ -79,18 +73,18 @@ export default function TopBar() {
                         {user && (
                             <DropdownMenu.Root open={menuOpened} onOpenChange={setMenuOpened}>
                                 <DropdownMenu.Trigger asChild>
-                                    <Avatar.Root style={{ cursor: 'pointer', marginLeft: 16, width: 36, height: 36, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: 'var(--color-primary-light)', color: 'var(--color-primary)', fontWeight: 700, fontSize: 16 }}>
+                                    <Avatar.Root className="user-avatar">
                                         <Avatar.Fallback>{getInitials()}</Avatar.Fallback>
                                     </Avatar.Root>
                                 </DropdownMenu.Trigger>
-                                <DropdownMenu.Content sideOffset={8} align="end" style={{ minWidth: 180, background: '#fff', borderRadius: 8, boxShadow: '0 4px 24px rgba(0,0,0,0.12)', padding: 8 }}>
-                                    <DropdownMenu.Item onSelect={() => { }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
+                                <DropdownMenu.Content sideOffset={8} align="end" className="dropdown-content">
+                                    <DropdownMenu.Item onSelect={() => { }} className="dropdown-item">
                                         <FontAwesomeIcon icon={faCog} /> Settings
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item onSelect={() => { }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
+                                    <DropdownMenu.Item onSelect={() => { }} className="dropdown-item">
                                         <FontAwesomeIcon icon={faList} /> My Posts
                                     </DropdownMenu.Item>
-                                    <DropdownMenu.Item onSelect={() => signOut()} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: 8, borderRadius: 6, cursor: 'pointer' }}>
+                                    <DropdownMenu.Item onSelect={() => signOut()} className="dropdown-item">
                                         <FontAwesomeIcon icon={faSignOutAlt} /> Logout
                                     </DropdownMenu.Item>
                                 </DropdownMenu.Content>
@@ -98,7 +92,7 @@ export default function TopBar() {
                         )}
                     </nav>
                     {/* Mobile menu button */}
-                    <button style={{ background: 'transparent', border: 'none', color: 'gray', fontSize: 24, minWidth: 40, display: 'none' /* TODO: add media query for mobile */ }} onClick={() => setMobileMenuOpen((o) => !o)}>
+                    <button className="mobile-menu-button" onClick={() => setMobileMenuOpen((o) => !o)}>
                         <FontAwesomeIcon icon={faBars} />
                     </button>
                 </div>

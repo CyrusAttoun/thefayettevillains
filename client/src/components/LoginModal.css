@@ -1,0 +1,9 @@
+/* LoginModal specific styles - imports shared styles from Shared.css */
+@import './Shared.css';
+
+/* These styles are already defined in Shared.css, so we don't need to repeat them here */
+/* .dialog-overlay, .dialog-content, .dialog-title, .dialog-close */
+/* .social-login-button, .social-buttons */
+/* .form-container, .form-input, .form-submit */
+/* .text-divider, .text-link, .text-center */
+/* .error-message, .disabled */

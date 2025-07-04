@@ -103,5 +103,9 @@ APP_VERSION=1.0.0
 - **TypeScript**: All frontend code is strictly typed
 - **Database**: LanceDB handles both structured data and binary assets (images)
 - **Tabs**: Always use 4 spaces for tabs
-- **Styles**: When creating styles, create the styles as plain css modules with the same name as their react component. Prefer this over inline styles when possible.
-- **React Components**: When creating React components, use 'function' instead of 'const'
+- **Styles**:
+    - Create styles as plain CSS files named after their React component (e.g., Button.css). Use inline styles only for trivial cases (no more than 2–3 style rules).
+    - Never hardcode colors; always reference colors from the central theme (in theme.css).
+    - Apply dynamic styles by toggling CSS class names in your markup (e.g., JSX/TSX). All visual state differences (like .active, .error, .disabled) must be defined in CSS, using class selectors, pseudo-classes, or CSS nesting. Avoid inline styles or dynamic style objects for state changes unless absolutely necessary.
+    - For style classes shared across multiple components, define them in Shared.css.
+- **React Components**: When creating React components, use 'function' syntax instead of 'const'

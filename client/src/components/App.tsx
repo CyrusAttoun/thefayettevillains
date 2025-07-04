@@ -5,6 +5,7 @@ import RummageMap from "./rummages/RummageMap";
 import AuthCallback from "./AuthCallback";
 import { AuthProvider } from "../contexts/AuthContext";
 import './App.css'
+import './Shared.css'
 
 export default function App() {
   return (

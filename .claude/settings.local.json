@@ -13,7 +13,15 @@
       "Search(*)",
       "Edit(*)",
       "Write(*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run:*)",
+      "Bash(sed:*)",
+      "Bash(for file in *.css)",
+      "Bash(do)",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
