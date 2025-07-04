@@ -46,7 +46,7 @@ def init_tables():
     # Create tables if they don't exist
     try:
         db.open_table("posts")
-    except FileNotFoundError:
+    except Exception:
         # Initialize with sample data
         sample_posts = [
             {
@@ -102,7 +102,7 @@ def init_tables():
     
     try:
         db.open_table("taglines")
-    except FileNotFoundError:
+    except (FileNotFoundError, ValueError):  # LanceDB may raise ValueError if table is missing
         # Initialize with sample taglines
         sample_taglines = [
             {TaglineColumns.ID: 1, TaglineColumns.TEXT: 'Where the hills are steep, the vibes are deep, and the rent makes you weep', TaglineColumns.ACTIVE: True, TaglineColumns.CREATED_AT: datetime.now().isoformat()},
