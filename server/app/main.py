@@ -10,7 +10,7 @@ from .database import init_tables, get_posts as db_get_posts, get_taglines, stor
 from .config import settings
 
 @asynccontextmanager
-def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI):
     # Initialize logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging.getLogger().setLevel(logging.INFO)
