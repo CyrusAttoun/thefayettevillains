@@ -6,7 +6,7 @@ export default function WelcomeStatement() {
   useEffect(() => {
     const fetchTagline = async () => {
       try {
-        const response = await fetch('http://localhost:8000/tagline');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/tagline`);
         if (response.ok) {
           const data = await response.json();
           setTagline(data.text);
